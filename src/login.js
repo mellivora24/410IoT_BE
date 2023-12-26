@@ -22,6 +22,6 @@ function login() {
         }
     })
     .catch(error => {
-        alert("Sai mật khẩu bạn ei!");
+        alert(error);
     });
 }
