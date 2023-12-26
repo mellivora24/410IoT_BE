@@ -47,16 +47,16 @@ app.post('/auth', async (req, res) => {
         var data = await DB.find({ phone: infor });
         if (data.length > 0) {
             if (data[0].pass === auth) {
-                res.json({ success: true, message: 'Login successful'});
+                res.json({ success: true, message: 'Đăng nhập thành công!'});
             } else {
-                res.status(500).json({ success: false, message: 'Incorrect password'});
+                res.status(500).json({ success: false, message: 'Sai mật khẩu rồi!'});
             }
         } else {
             data = await DB.find({ email: infor });
             if (data[0].pass === auth) {
-                res.json({ success: true, message: 'Login successful'});
+                res.json({ success: true, message: 'Đăng nhập thành công!'});
             } else {
-                res.status(500).json({ success: false, message: 'Incorrect password'});
+                res.status(500).json({ success: false, message: 'Sai mật khẩu rồi!'});
             }
         }
     } catch (error) { res.json(error); }
