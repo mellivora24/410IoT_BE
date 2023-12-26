@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/src', express.static('src'));
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', "*");
+    res.setHeader('Access-Control-Allow-Origin', "https://pfoz-iot.onrender.com");
     res.setHeader('Access-Control-Allow-Methods', 'GET','POST');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -39,6 +39,9 @@ app. get('/', (req, res) => {
 });
 app. get('/forgot', (req, res) => {
     res.sendFile(__dirname + '/forgot.html');
+});
+app. get('/home', (req, res) => {
+    res.sendFile(__dirname + '/home.html');
 });
 
 app.post('/auth', async (req, res) => {
