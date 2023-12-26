@@ -18,7 +18,7 @@ function login() {
         if (data.success) {
             window.location.href = "home";
         } else {
-            alert("Sai mật khẩu bạn ei!");
+            alert(data.message);
         }
     })
     .catch(error => {
