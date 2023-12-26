@@ -49,12 +49,12 @@ app.post('/auth', async (req, res) => {
             if (data[0].pass === auth) {
                 res.json({ success: true, message: 'Login successful'});
             } else {
-                res.json({ success: false, message: 'Incorrect password'});
+                res.status(500).json({ success: false, message: 'Incorrect password'});
             }
         } else {
             data = await DB.find({ email: infor });
             if (data[0].pass === auth) {
-                res.status(200).sendFile(__dirname + '/home.html');
+                res.json({ success: true, message: 'Login successful'});
             } else {
                 res.status(500).json({ success: false, message: 'Incorrect password'});
             }
