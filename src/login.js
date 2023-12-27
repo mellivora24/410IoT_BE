@@ -13,7 +13,7 @@ function login() {
             auth: pass
         })
     })
-    .then( response => response.json())
+    .then( response => return response.json())
     .then( data => {
         if (data.success) {
             window.location.href = "home";
