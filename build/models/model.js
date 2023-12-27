@@ -7,11 +7,7 @@ var Schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  email: {
-    type: String,
-    required: true
-  },
-   phone: {
+  msv: {
     type: String,
     required: true
   },
