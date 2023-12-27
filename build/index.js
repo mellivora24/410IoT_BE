@@ -15,7 +15,7 @@ app.use('/src', express.static('src'));
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'https://pfoz-iot.onrender.com');
     res.setHeader('Access-Control-Allow-Origin', 'https://pfoz-iot.onrender.com/auth');
-    res.setHeader('Access-Control-Allow-Methods', 'GET','POST');
+    res.setHeader('Access-Control-Allow-Methods', 'GET', 'POST');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
@@ -35,35 +35,28 @@ var connectDB = async () => {
 
 connectDB();
 
-app. get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/login.html');
 });
-app. get('/forgot', (req, res) => {
+app.get('/forgot', (req, res) => {
     res.sendFile(__dirname + '/forgot.html');
 });
-app. get('/home', (req, res) => {
+app.get('/home', (req, res) => {
     res.sendFile(__dirname + '/home.html');
 });
 
 app.post('/auth', async (req, res) => {
+    const { infor, auth } = req.body;
     try {
-        const { infor, auth } = req.body;
-        if (data1.length > 0) {
-            var data1 = await DB.find({ phone: infor });
-            if (data1[0].pass === auth) {
-                res.json({ success: true, message: 'Đăng nhập thành công!'});
-            } else {
-                res.status(500).json({ success: false, message: 'Sai mật khẩu rồi!'});
-            }
+        var data = await DB.find({ msv: infor });
+        if (data[0].pass === auth) {
+            res.json({ success: true, message: 'Đăng nhập thành công!' });
         } else {
-            var data2 = await DB.find({ email: infor });
-            if (data2[0].pass === auth) {
-                res.json({ success: true, message: 'Đăng nhập thành công!'});
-            } else {
-                res.status(500).json({ success: false, message: 'Sai mật khẩu rồi!'});
-            }
+            res.status(500).json({ success: false, message: 'Sai mật khẩu rồi!' });
         }
-    } catch (error) { res.json(error); }
+    } catch (error) {
+        res.json({ success: false, message: error });
+    }
 });
 
 app.listen(PORT, () => {
