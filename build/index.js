@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/src', express.static('src'));
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://pfoz-iot.onrender.com https://pfoz-iot.onrender.com/');
+    res.setHeader('Access-Control-Allow-Origin', 'https://pfoz-iot.onrender.com https://pfoz-iot.onrender.com/auth');
     res.setHeader('Access-Control-Allow-Methods', 'GET','POST');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
