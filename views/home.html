@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>P410 SmartHome</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="shortcut icon" type="image/png" href="/public/images/title-logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="display: flex; flex-direction: column; align-items: center;">
+    <div style="margin-bottom: 1%;" class="logo-login">
+        <img id="logo-login" src="/public/images/title-logo.png" alt="logo">
+        <h1>Phòng 410</h1>
+    </div>
+
+    <div class="map">
+        <div class="in-room">
+            <button id="led-1" class="on-off-btn-2">Đèn 1</button>
+            <button id="fan-1" class="on-off-btn-1">Quạt 1</button>
+            <button id="led-2" class="on-off-btn-1">Đèn 2</button>
+            <button id="fan-2" class="on-off-btn-1">Quạt 2</button>
+            <button id="led-3" class="on-off-btn-1">Đèn 3</button>
+        </div>
+        <div style="display: none;" class="out-room">
+            <div id="bath-room-led" class="on-off-btn-1"><button>Phòng tắm</button></div>
+            <div id="toilet-room-led" class="on-off-btn-1"><button>Nhà WC</button></div>
+        </div>
+    </div>
+
+    <div class="next-slide">
+        <button id="in" class="change-map-onchange">Trong phòng</button>
+        <button id="out" class="change-map-btn">Ngoài phòng</button>
+    </div>
+    <script src="/public/js/home.js"></script>
+</body>
+</html>
