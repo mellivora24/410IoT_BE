@@ -187,10 +187,12 @@ button {
     .on-off-btn-2 {
         height: 8vh;
         width: 8vh;
+        font-size: 80%;
     }
     .on-off-btn-1:hover, .on-off-btn-2:hover {
-        height: 10vh;
-        width: 10vh;
+        height: 8vh;
+        width: 8vh;
+        font-size: 80%;
     }
     .change-map-btn {
         height: 8vh;
@@ -199,6 +201,10 @@ button {
     .change-map-onchange {
         height: 8vh;
         width: 20vw;
+    }
+    .change-map-btn:hover {
+        background-color: rgba(255, 255, 255, 0);
+        font-size: 80%;
     }
     
     #logo-login {
