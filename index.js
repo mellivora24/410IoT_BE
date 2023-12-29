@@ -58,7 +58,6 @@ app.post('/auth', async (req, res) => {
     const { infor, auth } = req.body;
     try {
         var data = await mDB.find({ msv: infor });
-        console.log(data[0].pass === auth)
         if (data[0].pass === auth) {
             res.status(200).json({ success: true, message: 'Đăng nhập thành công!' });
         } else {
