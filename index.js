@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const app = express();
-const serviceAccount = require('./auth/auth.json');
+const serviceAccount = require('./build/auth.json');
 const admin = require('firebase-admin');
 
 admin.initializeApp({
