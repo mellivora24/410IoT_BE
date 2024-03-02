@@ -18,7 +18,8 @@
     "express": "^4.18.2",
     "mongoose": "^8.0.3",
     "nodemon": "^3.0.1",
-    "firebase": "^10.7.1",
-    "firebase-admin": "^12.0.0"
+    "dotenv": "^16.4.5",
+    "firebase": "^10.8.0",
+    "firebase-admin": "^12.0.0",
   }
 }
