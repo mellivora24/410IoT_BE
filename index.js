@@ -1,48 +1,36 @@
 "use strict";
 
+require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const { initializeApp } = require('firebase/app');
+const { getAuth, signInWithEmailAndPassword, onAuthStateChanged} = require('firebase/auth');
 
 const app = express();
-const serviceAccount = require('./build/auth.json');
-const admin = require('firebase-admin');
+const firebaseConfig = {
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    databaseURL: process.env.databaseURL,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId
+};
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://devices-410-default-rtdb.asia-southeast1.firebasedatabase.app"
-});
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
 
-var PORT = process.env.PORT || 5000;
-var mDB = require('./build/model');
-const fDB = admin.database();
-
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use('/public', express.static('public'));
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'https://pfoz-iot.onrender.com/');
-    res.setHeader('Access-Control-Allow-Origin', 'https://pfoz-iot.onrender.com/');
-    res.setHeader('Access-Control-Allow-Methods', 'GET', 'POST');
+    res.setHeader('Access-Control-Allow-Methods', ['GET', 'POST']);
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
-
-mongoose.set('strictQuery', true);
-
-var connectDB = async () => {
-    try {
-        await mongoose.connect('mongodb+srv://host:76YHG5lrAwQbNvTL@admin0.nbgexxx.mongodb.net/?retryWrites=true&w=majority');
-        console.log("Ready to use!");
-    } catch (error) {
-        console.log(error.message);
-        process.exit(1);
-    }
-};
-
-
-connectDB();
 
 app.get('/', async (req, res) => {
     res.sendFile(__dirname + '/views/login.html');
@@ -50,40 +38,31 @@ app.get('/', async (req, res) => {
 app.get('/forgot', async (req, res) => {
     res.sendFile(__dirname + '/views/forgot.html');
 });
-app.get('/home', async (req, res) => {
-    res.sendFile(__dirname + '/views/home.html');
+
+app.post('/auth',  (req, res) => {
+    const email = req.body.Email;
+    const password = req.body.Password;
+    const passkey = process.env.passkey;
+    try {
+        const userCredential =  signInWithEmailAndPassword(auth, email, password);
+        res.status(200).json({ success: true, message: 'Đăng nhập thành công!', passkey: passkey });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Đăng nhập thất bại!', passkey: "hehehe" });
+    }
 });
 
-app.post('/auth', async (req, res) => {
-    const { infor, auth } = req.body;
-    try {
-        var data = await mDB.find({ msv: infor });
-        if (data[0].pass === auth) {
-            res.status(200).json({ success: true, message: 'Đăng nhập thành công!' });
-        } else {
-            res.status(500).json({ success: false, message: 'Sai mật khẩu rồi!' });
-        }
-    } catch (error) {
-        res.json({ success: false, message: error });
+app.get('/home', (req, res) => {
+    const p = req.query.p;
+    const passkey = process.env.passkey;
+    if (passkey === p) {
+        res.sendFile(__dirname + '/views/home.html');
+    } else {
+        res.redirect('/');
     }
 });
-app.post('/update', async (req, res) => {
-    const { key, value} = req.body;
-    try {
-        const ref = fDB.ref('/' + key);
-        const data = { value };
-        ref.update(data, (error) => {
-            if (error) {
-                res.status(500).json({ message: "Lỗi cập nhật trạng thái!" });
-            } else {
-                res.status(200).json({ message: "" });
-            }
-        });
-    } catch (error) {
-        res.status(404).json({ message: error });
-    }
-});
+
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server is running: http://127.0.0.1:${PORT}`);
+    console.log(`Server is running on: http://127.0.0.1:${PORT}`);
 });
