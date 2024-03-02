@@ -2,15 +2,13 @@ function login(event) {
 
     event.preventDefault();
 
-    var infor = document.getElementById('email-phone').value;
-    var pass = document.getElementById('password').value;
+    var email = document.getElementById('email-phone').value;
+    var password = document.getElementById('password').value;
 
     const pws = {
-        infor: infor,
-        auth: pass
+        Email: email,
+        Password: password
     }
-
-    console.log(pws)
 
     const url = window.location.protocol + '//' + window.location.host + '/auth';
 
@@ -22,7 +20,8 @@ function login(event) {
     .then( response => response.json())
     .then( data => {
         if (data.success) {
-            window.location.href = "home";
+            const passkey = data.passkey;
+            window.location.href = `home?p=${passkey}`;
         } else {
             alert(data.message);
         }
