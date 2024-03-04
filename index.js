@@ -43,12 +43,13 @@ app.post('/auth',  (req, res) => {
     const email = req.body.Email;
     const password = req.body.Password;
     const passkey = process.env.passkey;
-    try {
-        const userCredential =  signInWithEmailAndPassword(auth, email, password);
-        res.status(200).json({ success: true, message: 'Đăng nhập thành công!', passkey: passkey });
-    } catch (error) {
-        res.status(500).json({ success: false, message: 'Đăng nhập thất bại!', passkey: "hehehe" });
-    }
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            res.status(200).json({ success: true, message: 'Đăng nhập thành công!', passkey: passkey });
+        })
+        .catch((error) => {
+            res.status(500).json({ success: false, message: 'Đăng nhập thất bại!', passkey: "hehehe" });
+        });
 });
 
 app.get('/home', (req, res) => {
