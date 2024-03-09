@@ -17,15 +17,15 @@
 
     <div class="map">
         <div id="1" class="in-room">
-            <button id="led_1" class="on-off-btn-1">Đèn 1</button>
-            <button id="fan_1" class="on-off-btn-1">Quạt 1</button>
-            <button id="led_2" class="on-off-btn-1">Đèn 2</button>
-            <button id="fan_2" class="on-off-btn-1">Quạt 2</button>
-            <button id="led_3" class="on-off-btn-1">Đèn 3</button>
+            <button id="led_1" class="on-off-btn-1" onclick="change_state('led_1')">Đèn 1</button>
+            <button id="fan_1" class="on-off-btn-1" onclick="change_state('fan_1')">Quạt 1</button>
+            <button id="led_2" class="on-off-btn-1" onclick="change_state('led_2')">Đèn 2</button>
+            <button id="fan_2" class="on-off-btn-1" onclick="change_state('fan_2')">Quạt 2</button>
+            <button id="led_3" class="on-off-btn-1" onclick="change_state('led_3')">Đèn 3</button>
         </div>
         <div id="2" style="display: none;" class="out-room">
-            <button id="bath_room_led" class="on-off-btn-1">Phòng tắm</button>
-            <button id="toilet_room_led" class="on-off-btn-1">Nhà WC</button>
+            <button id="bath_room_led" class="on-off-btn-1" onclick="change_state('led_bath')">Phòng tắm</button>
+            <button id="toilet_room_led" class="on-off-btn-1" onclick="change_state('led_wc')">Nhà WC</button>
         </div>
     </div>
 
