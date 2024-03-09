@@ -1,18 +1,9 @@
-const url = window.location.protocol + '//' + window.location.host + '/update';
-
-let st_led_1 = true;
-let st_led_2 = true;
-let st_led_3 = true;
-let st_led_bath = true;
-let st_led_wc = true;
-let st_fan_1 = true;
-let st_fan_2 = true;
-
 const led_1 = document.getElementById('led_1');
 const led_2 = document.getElementById('led_2');
 const led_3 = document.getElementById('led_3');
-const led_bath = document.getElementById('bath_room_led');
-const led_wc = document.getElementById('toilet_room_led');
+
+var led_bath;
+var led_wc;
 
 const fan_1 = document.getElementById('fan_1');
 const fan_2 = document.getElementById('fan_2');
@@ -46,26 +37,16 @@ function hide_show_in() {
     }
 }
 
-function init() {
-    
+function change_state(object) {
+    if (object === 'led_bath' || object === 'led_wc') {
+        led_bath = document.getElementById('bath_room_led');
+        led_wc = document.getElementById('toilet_room_led');
+    }
+    if (window[object].classList.contains('on-off-btn-1')) {
+        window[object].classList.remove('on-off-btn-1');
+        window[object].classList.add('on-off-btn-2');
+    } else if (window[object].classList.contains('on-off-btn-2')) {
+        window[object].classList.remove('on-off-btn-2');
+        window[object].classList.add('on-off-btn-1');
+    }
 }
-
-// function change(key, value) {
-//     fetch (url, {
-//         method: 'POST',
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//             key: key,
-//             value: value
-//         })
-//     })
-//     .then (response => response.json())
-//     .catch ( error => {
-//         alert(error);
-//     })
-// }
-// function change_st(key, value) {
-
-// }
