@@ -55,7 +55,7 @@ button {
     height: 100%;
 }
 .on-off-btn-1 {
-    transition-duration: 0.2s;
+    transition-duration: 0.1s;
     height: 20vh;
     width: 20vh;
     border-radius: 50%;
@@ -67,7 +67,7 @@ button {
     font-size: 100%;
 }
 .on-off-btn-2 {
-    transition-duration: 0.2s;
+    transition-duration: 0.1s;
     height: 20vh;
     width: 20vh;
     border-radius: 50%;
@@ -114,16 +114,28 @@ button {
     height: 20%;
     width: 20%;
 }
-#email-phone, #password, #login-button {
+.email-phone, .password, .login-button {
     width: 60%;
     height: 25px;
     border-radius: 5px;
     margin: 2px;
     border: 1px solid #4a96fb;
 }
-#email-phone:focus, #password:focus, #email-phone:hover, #password:hover {
+.email-phone:focus, .password:focus, .email-phone:hover, .password:hover {
     outline: 1px solid #0062e2;
 }
+.email-phone-wrong, .password-wrong {
+    width: 60%;
+    height: 25px;
+    border-radius: 5px;
+    margin: 2px;
+    border: 1px solid #ff0000;
+}
+.email-phone-wrong:focus, .password-wrong:focus, .email-phone-wrong:hover, .password-wrong:hover {
+    outline: 1px solid #ff0000;
+    ;
+}
+
 #login-button {
     width: 20%;
     height: 30px;
@@ -204,7 +216,7 @@ button {
     }
     .change-map-btn:hover {
         background-color: rgba(255, 255, 255, 0);
-        font-size: 80%;
+        font-size: 100%;
     }
     
     #logo-login {
